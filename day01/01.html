@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello World</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload=function(){
+            new Vue({
+                el:'#itany',
+                data:{
+                    msg:'Hello World'
+                }
+            });    
+        }
+        
+    </script>
+</head>
+<body>
+    <div id="itany">
+        {{msg}}
+    </div>
+    <div id="app-3">
+        <p v-if="seen">现在你看到我了</p>
+    </div>
+    <script>
+        var app3=new vue({
+            el:"#app-3",
+            data:{
+                seen:true
+            }
+        })
+    </script>
+</body>
+</html>
