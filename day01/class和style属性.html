@@ -5,17 +5,50 @@
     <title>class和style属性</title>
     <script src="vue.js"></script>
     <script>
-    window.onload=function(){
-        let vm=new  vue({
-
-        })
-    }
+        window.onload=function(){
+            let vm=new  Vue({
+                el:'#itany',
+                data:{
+                    bb:'aa',
+                    dd:'cc',
+                    flag:true,
+                    num:-2,
+                    hello:{aa:true,cc:true},
+                    xx:{color:'pink',fontSize:'30px'},
+                    yy:{backgroundColor:'grey'}
+                }
+            });
+        }
     </script>
     <style>
-    
+        .aa{
+            color: blue;
+            font-size:20px;
+        }
+        .cc{
+            background-color: #ccc;
+        }
     </style>
 </head>
 <body>
-    <div id=""></div>
+    <div id="itany">
+        <!-- <p class="aa">北京航空航天大学</p> -->
+        <!-- <p :class="aa">北京航空航天大学</p>    不可以，Vue的属性绑定时不能直接css样式 -->
+        <!-- 1.变量形式 -->
+        <!-- <p :class="bb">北京航空航天大学</p> -->
+
+        <!-- 2.数组形式 -->
+        <!-- <p :class="[bb,dd]">北京航空航天大学</p> -->
+
+        <!-- 3.json形式，常用！！！ -->  
+        <!-- <p :class="{aa:true,cc:flag}">北京航空航天大学</p> -->
+        <!-- <p :class="{aa:num>0}"</p>北京航空航天大学</p> -->
+
+        <!-- 4.变量引用json形式 -->
+        <!-- <p :class="hello">北京航空航天大学</p> -->
+
+        <!-- style属性 -->
+        <p :style="[xx,yy]">北京航空航天大学</p>
+    </div>
 </body>
 </html>
