@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发送AJAX请求</title>
+    <script src="js/vue.js"></script>
+	<script src="js/axios.min.js"></script>
+    <script src="js/vue-resource.min.js"></script>
+    <script>
+        window.onload=function(){
+            new Vue({
+                el:'#itany',
+                data:{
+                    user:{},
+                    uid:''
+                },
+                methods:{
+                    send(){
+                        axios({
+                            method:'get',
+                            url:'user.json'
+                        }).then(function(resp){
+                            console.log(resp.data);
+                            // console.log(resp);
+                        }).catch(resp => {
+                            console.log('请求失败：'+resp.status+','+resp.statusText);
+                        });
+                    },
+                    sendGet(){
+                        axios.get('server1.php',{
+                            params:{
+                                name:'alice',
+                                age:19
+                            }
+                        }).then(resp => {
+                            console.log(resp.data);
+                        }).catch(err => {
+                            console.log('请求失败：'+resp.status+','+resp.statusText);
+                        });
+                    },
+                    sendPost(){
+                        // axios.post('server.php',{
+                        //     name:'alice',
+                        //     age:19
+                        // })
+                        //错误的方式
+                        // axios.post('server.php','name=alice&age=20')//方式1
+                        axios.post('server.php',{
+                            transformRequest:[
+                                function(data){
+                                    let params='';
+                                    for(let index in data){
+                                        params+=index+'='+data[index]+'&';
+                                    }
+                                    return params;
+                                }
+                            ]
+                        })
+                        .then(resp => {
+							console.log(resp.data);
+						}).catch(err => {
+							console.log('请求失败：'+err.status+','+err.statusText);
+						});
+                    },
+                    getUserById(uid){
+                        axios.get(`https://api.github.com/users/${uid}`)
+                        .then(resp => {
+                            this.user=resp.data;
+                        });
+                    },
+                    sendJSONP(){
+                        this.$http.jsonp('https://sug.so.360.cn/suggest',{
+                            params:{
+                                word:'a'
+                            },
+                        }).then(resp => {
+                            console.log(resp.data.s);
+                        });
+                    },
+                    sendJSONP2(){
+                        this.$http.jsonp('https://www.baidu.com/s?',{
+                            params:{
+                                word:'a'
+                            },
+                            jsonp:'cb'
+                        }).then(resp => {
+                            console.log(resp.data.s);
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="itany">
+        <button @click="send">发送AJAX请求</button>
+
+        <button @click="sendGet">GET方式发送AJAX请求</button>
+
+        <button @click="sendPost">POST方式发送AJAX请求</button> 
+        <hr>
+        <br>
+       
+        Github ID: <input type="text" v-model="uid">
+        <button @click="getUserById(uid)">获取指定GitHub账户信息并显示</button>
+        <br>
+        姓名：{{user.name}} <br>
+        头像：<img :src="user.avatar_url" alt="">
+
+        <hr>
+
+        <button @click="sendJSONP">向360搜索发送JSONP请求</button>
+        <button @click="sendJSONP2">向百度搜索发送JSONP请求</button>
+    </div>
+    
+</body>
+</html>
