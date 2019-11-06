@@ -16,11 +16,13 @@
         <h2>{{reverseMsg}} </h2>
         <button @click="change">改变值</button>
         <!-- 计算属性和方法对比 -->
-        <h2>{{num1}}</h2>
+        <!-- <h2>{{num1}}</h2>
         <h2>{{num2}}</h2>
-        <h2>{{getNumber2}} </h2>
+        <h2>{{getNumber2}} </h2> -->
 
-        <button @click="fn()" >测试</button>
+         <button onclick="fn()" >测试</button>
+        <h2>{{num2}} </h2>
+        <button @click="change2">修改计算属性</button> 
     </div>
     <script>
         var vm=new Vue({
@@ -38,7 +40,7 @@
                 },
                 num2:{
                     get:function(){
-                        conslole.log('num2:'+new Date());
+                        console.log('num2：'+new Date());
                         return this.num1-1;
                     },
                     set:function(val){
@@ -51,7 +53,7 @@
                     this.num1=666;
                 },
                 getNum2(){
-                    conslole.log(new Date());
+                    console.log(new Date());
                     return this.num1-1;
                 },
                 change2(){

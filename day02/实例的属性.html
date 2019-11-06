@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实例的属性和方法</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="itany">
+        {{msg}}
+        <h2 ref="hello">你好</h2>
+        <h2 ref="world">世界</h2>
+        <hr>
+
+        <h1 ref="title">标题：{{name}} </h1>
+    </div>
+    <script>
+        // var vm =new Vue({
+        //     // el:'#itany',
+        //     data:{
+        //         msg:'Welcome to BeiHang University！'
+        //     },
+        //     name:'pyy',
+        //     age:23,
+        //     show:function(){
+        //         console.log('show');
+        //     }
+
+        // });
+        //vm.属性名 获取data中的属性
+        // console.log(vm.msg);
+
+        //vm.$el 获取vue实例关联的元素
+        // console.log(vm.$el);//DOM对象
+        // vm.$el.style.color='blue';
+
+        //vm.$data //获取数据对象data
+        // console.log(vm.$data)
+        // console.log(vm.$data.msg)
+
+        //vm.$options //获取自定义属性
+        // console.log(vm.$options.name)
+        // console.log(vm.$options.age)
+        // vm.$options.show();
+
+        //vm.$refs 获取所有添加ref属性的元素
+        // console.log(vm.$refs);
+        // console.log(vm.$refs.hello);//DOM对象
+        // vm.$refs.world.style.color='purple'; 
+
+        // 方法
+        // vm.$mount('#itany');//手动挂载vue实例
+        var vm =new Vue({
+            data:{
+                msg:'hello world!',
+                name:'dfr'
+            }
+        }).$mount('#itany');
+        //vm.$destroy() 销毁实例
+        // vm.$destroy();
+        //修改数据
+        vm.name ='汤姆';
+        //DOM还没更新完，Vue实现响应式并不是数据发生改变之后DOM立即变化，需要按一定的策略进行DOM更新，需要时间！！
+        // console.log(vm.$refs.title.textContent);
+
+        vm.$nextTick(function(){
+            //DOM更新完成，更新完成后再执行此代码
+			console.log(vm.$refs.title.textContent);
+        });
+
+
+    </script>
+</body>
+</html>
