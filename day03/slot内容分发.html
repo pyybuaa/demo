@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slot内容分发</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="itany">
+        <!-- <my-hello>wbsdfjskalf</my-hello> -->
+        <my-hello>
+            <ul slot="s1">
+                <li>aaa</li>
+                <li>bbb</li>
+                <li>ccc</li>
+            </ul>
+            <ol slot="s2"> 
+                <li>111</li>
+                <li>222</li>
+                <li>333</li>
+            </ol>
+        </my-hello>
+    </div>
+
+    <template id="hello">
+        <div>
+            <slot name='s2'></slot>
+            <h3>welcome to Beihang!</h3>
+            <slot name='s1'></slot>
+        </div>
+    </template>
+ 
+    <script>
+        var vm =new Vue({
+            el:'#itany',
+            components:{
+                'my-hello':{
+                    template:'#hello',
+                }
+            }
+        })
+    </script>
+</body>
+</html>
