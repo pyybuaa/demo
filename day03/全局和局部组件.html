@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定义组件的两种方式</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="itany">
+        <my-hello></my-hello>
+        <my-world></my-world>
+    </div>
+    <script>
+        //全局组件
+        Vue.component('my-hello',{
+            template:'<h3>{{name}}</h3>',
+            data:function(){
+                return{
+                    name:'alice',//这里存放数据
+                }    
+            }
+        });
+
+        var vm=new Vue({//这里的vm也是一个组件
+            el:'#itany',
+            data:{
+                msg:'北京航空航天大学',
+            },
+            //局部组件
+            components:{
+                'my-world':{
+                    template:'<h3>{{age}}</h3>',
+                    //data:function(){
+                    data(){
+                        return{
+                            age:18,//这里存放数据
+                        }    
+                }   }
+            }
+        })
+    </script>
+</body>
+</html>
